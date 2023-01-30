@@ -77,19 +77,28 @@ entradaDados.question('Digite seu nome: \n', function (nome) {
                     let valor4 = nota4;
                     let media;
 
+                    //Tratamento de erros
                     if(valor1 == '' || valor2 == '' || valor3 == '' || valor4 == ''){
                         console.log('ERRO: Algum valor está vazio.')
-                    } else if( isNaN(valor1) || isNaN(valor2) || isNaN(valor3) || isNaN(valor4)){
+                    }else if( isNaN(valor1) || isNaN(valor2) || isNaN(valor3) || isNaN(valor4)){
                         console.log('ERRO: O valor inserido deve ser um número.')
+                    }else if (valor1 < 0 || valor1 > 10 || valor2 < 0 || valor2 > 10 ||valor3 < 0 || valor3 > 10 ||valor4 < 0 || valor4 > 10){
+                        console.log('ERRO: O valor das notas deve estar entre 0 e 10!');
                     }else{
                         media = (parseFloat(valor1) + parseFloat(valor2) + parseFloat(valor3) + parseFloat(valor4)) / 4;
+
+                        if (parseFloat(media) < 7){
+                            console.log('Status: Aluno reprovado!');
+                        }else{
+                            console.log('Status: Aluno aprovado!');
+                        };
 
                         console.log('Nota primeiro bimestre: ' + valor1);
                         console.log('Nota segundo bimestre: ' + valor2);
                         console.log('Nota terceiro bimestre: ' + valor3);
                         console.log('Nota quarto bimestre: ' + valor4);
     
-                        console.log('Sua média é: ' + media);
+                        console.log('Sua média é: ' + media.toFixed(1));
                     }
                    
                 });
