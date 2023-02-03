@@ -13,6 +13,7 @@
  ToLowerCase ⇒ Converte uma String em minúsculo.
 */
 
+var matematica = require('./modulo/calculadora.js') 
 
 // Import da biblioteca de entrada de dados
 var readline = require('readline');
@@ -43,29 +44,11 @@ entradaDados.question('Valor 1: \n', function (numero1) {
                 console.log('ERRO: Não é possível calcular se os dados digitados não forem números');
             } else {
 
-                if (operacao == 'SOMAR')
-                    resultado = Number(valor1) + Number(valor2);
-                else if (operacao == 'SUBTRAIR')
-                    resultado = Number(valor1) - Number(valor2);
-                else if (operacao == 'MULTIPLICAR')
-                    resultado = Number(valor1) * Number(valor2);
-                else if (operacao == 'DIVIDIR') {
-                    if (valor2 == 0)
-                        console.log('ERRO: Não é possível realizar a divisão por 0!');
-                    else;
-                        resultado = Number(valor1) / Number(valor2);
-                }else{
-                    console.log('ERRO: Sua escolha de operação matemática foi inválida!');
-                    //Finaliza o callback (Sai do programa)
-                    entradaDados.close();
-                }
-
-                // validação para quando a variável não for processada por algum problema.
-                if(resultado == undefined)
-                    console.log('ERRO: Não foi possível encontrar um valor válido!');
+                resultado = matematica.calculadora(valor1,valor2,operacao);
+                if(resultado != false)
+                    console.log(resultado);
                 else
-                console.log('Resultado: ' + resultado)
-
+                entradaDados.close();
             }
         });
     });
