@@ -45,10 +45,12 @@ entradaDados.question('Valor 1: \n', function (numero1) {
             } else {
 
                 resultado = matematica.calculadora(valor1,valor2,operacao);
-                if(resultado != false)
-                    console.log(resultado);
+                // if(resultado == false && typeof(resultado) == 'Boolean')
+                if(resultado === false)
+                    entradaDados.close();
                 else
-                entradaDados.close();
+                    console.log(resultado);
+                    entradaDados.close();
             }
         });
     });
