@@ -27,12 +27,12 @@ entradaDados.question('Digite o multiplicando: ', function (multiplicando) {
         else if(isNaN(multiplicando) || isNaN(maxMultiplicador))
             console.log('ERRO: Digite apenas números.');
         else{
-            // resultado = matematica.calculadora();
-            // if(resultado === false)
-            //     entradaDados.close();
-            // else
-            //     console.log(resultado);
-            //     entradaDados.close();
+            resultado = tabuada.calcularTabuada(multiplicando, maxMultiplicador);
+            if(resultado === false)
+                entradaDados.close();
+            else
+                console.log(resultado);
+                entradaDados.close();
         }
 
     });

@@ -37,7 +37,7 @@ const calcularTabuada = function (multiplicando, maxMultiplicador) {
     }
     
 
-calcularTabuada(7,90)
+// calcularTabuada(7,90)
 
 module.exports = {
     calcularTabuada
