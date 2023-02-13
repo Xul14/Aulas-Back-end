@@ -7,6 +7,7 @@
 
 var media = require('./modulo/media.js');
 var exame = require('./modulo/exame.js');
+var console = require('./modulo/console.js');
 
 var readline = require('readline');
 
@@ -24,8 +25,20 @@ entradaDados.question('Nome do(a) Aluno(a): ', function (aluno) {
         entradaDados.question('Escolha o sexo do(a) Aluno(a): FEMININO || MASCULINO \n', function (sexoA) {
             let sexoAluno = sexoA.toUpperCase;
 
+            // if(sexoA == FEMININO){
+            //     sexoAluno = 'Aluna'
+            // } else{
+            //     sexoAluno = 'Aluno'
+            // }
+
             entradaDados.question('Escolha o sexo do(a) Professor(a): FEMININO || MASCULINO \n', function (sexoP) {
                 let sexoProfessor = sexoP.toUpperCase;
+
+                // if(sexoP == FEMININO){
+                //     sexoProfessor = 'Aluna'
+                // } else{
+                //     sexoProfessor = 'Aluno'
+                // }
 
                 entradaDados.question('Nome do curso: ', function (cursoNome) {
                     let curso = cursoNome;
@@ -64,7 +77,7 @@ entradaDados.question('Nome do(a) Aluno(a): ', function (aluno) {
                                                 console.log(resultado);
                                             } else {
                                                 entradaDados.question('Digite a nota do exame do Aluno(a): ', function (resultadoExame) {
-                                                    resultadoExame = resultado
+                                                    resultadoExame = resultado;
 
                                                     if (exame == false){
                                                         resultado = 'Reprovado'

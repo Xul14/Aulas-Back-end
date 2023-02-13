@@ -12,3 +12,7 @@ let exibir = console.log('O aluno' + nomeAluno + 'foi' + resultado + 'na discipl
 
 return exibir
 }
+
+module.exports = {
+    exibir
+ }
