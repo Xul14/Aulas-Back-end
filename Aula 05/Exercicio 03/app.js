@@ -16,22 +16,16 @@ var entradaDados = readline.createInterface({
 entradaDados.question('Número inicial: ', function (numInicial) {
     let numeroInicial = Number(String(numInicial.replace(',', '.')));
 
-    entradaDados.question('Número inicial: ', function (numFinal) {
+    entradaDados.question('Número final: ', function (numFinal) {
         let numeroFinal = Number(String(numFinal.replace(',', '.')));
-        let resultado;
 
-        if(numeroInicial == '' || numeroFinal == ''){
-            console.log('ERRO: Entradas vazias!');
-        }else if(isNaN(numeroInicial) || isNaN(numeroFinal)){
-            console.log('ERRO: O valor digitado deve ser um número!');
-        }else{
-            resultado = separador.separador(numInicial, numFinal);
-            if (resultado === false)
+        entradaDados.question('Quais números irão aparecer? \n 1-Ímpar \n 2-Par \n 3-Ímpares e Pares \n', function(escolhaUsuario){
+            let escolhaUser = escolhaUsuario
+            let resultado;
+
+                resultado = separador.separador(numeroInicial, numeroFinal, escolhaUser);
                 entradaDados.close();
-            else
-                console.log(resultado);
-            entradaDados.close();
-        }
-        
+
+        });
     });
 });
