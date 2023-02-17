@@ -12,7 +12,7 @@ const calcularMedia = function(nota1, nota2 ,nota3 ,nota4){
     let quartaNota = nota4;
     let media;
 
-        media = (primeiraNota + segundaNota + terceiraNota + quartaNota) / 4;
+        media = (parseFloat(primeiraNota) +parseFloat(segundaNota) + parseFloat(terceiraNota) + parseFloat(quartaNota)) / 4;
     
     return media;
 

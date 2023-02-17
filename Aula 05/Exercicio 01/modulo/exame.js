@@ -6,16 +6,13 @@
 ***********************************************************************/
 
 const exame = function(media, resExame){
-    media = media.exame(media, resExame);
-    let resultadoExame = (media + resExame) /2;
-    let status = true
 
-    if(resultadoExame < 60)
-        status = false
-    else
-        status = true
+    let resultadoExame = resExame;
+    let mediaDoAluno = media;
 
-    return status
+    let mediaExame = (parseFloat(mediaDoAluno) + parseFloat(resultadoExame)) / 2;
+
+    return mediaExame
 
 }
 
