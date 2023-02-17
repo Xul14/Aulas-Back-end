@@ -5,7 +5,7 @@
 * Versão: 1.0
 ***********************************************************************/
 
-const exame = function(media, resExame){
+const getExame = function(media, resExame){
 
     let resultadoExame = resExame;
     let mediaDoAluno = media;
@@ -17,5 +17,5 @@ const exame = function(media, resExame){
 }
 
 module.exports = {
-   exame
+   getExame
 }

@@ -7,7 +7,6 @@
 
 var media = require('./modulo/media.js');
 var exame = require('./modulo/exame.js');
-// var exibir = require('./modulo/console.js');
 
 var readline = require('readline');
 
@@ -45,7 +44,6 @@ entradaDados.question('Nome do(a) Aluno(a): ', function (aluno) {
 
                                     entradaDados.question('Digite a quarta nota: ', function (valor4) {
                                         let nota4 = valor4.replace(',', '.');
-                                        // let resultado;
 
                                         if (nomeAluno == '' || nomeProfessor == '' || sexoAluno == '' || sexoProfessor == '' || curso == '' || disciplina == '' || nota1 == '' || nota2 == '' || nota3 == '' || nota4 == '')
 
@@ -72,7 +70,6 @@ entradaDados.question('Nome do(a) Aluno(a): ', function (aluno) {
                                             let sexoDoAluno;
                                             let sexoDoProfessor;
                                             let statusAprovacao;
-                                            // let exibirConsole;
                                             mediaAluno = media.calcularMedia(nota1, nota2, nota3, nota4);
 
                                             if (sexoAluno == 1) {
@@ -97,30 +94,26 @@ entradaDados.question('Nome do(a) Aluno(a): ', function (aluno) {
 
                                             } else if (mediaAluno >= 50 && mediaAluno <= 69) {
 
-                                                console.log('Aviso: `$sexoDoAluno` precisa fazer o exame');
+                                                console.log('Aviso: O aluno precisa fazer o exame');
                                                 entradaDados.question('Nota do exame: ', function (resultadoExame) {
                                                     notaExam = resultadoExame.replace(',', '.');
 
-                                                    let resExam = exame.exame(media, mediaExame);
+                                                    let resExam = exame.getExame(mediaAluno, notaExam);
 
                                                     if (resExam >= 70) {
                                                         statusAprovacao = 'aprovado';
-                                                        console.log(resultado);
                                                     }
                                                     else if (resExam <= 50) {
                                                         statusAprovacao = 'reprovado';
-                                                        console.log(resultado);
                                                     }
-                                                });
 
-                                                console.log('\n ' + sexoDoAluno + ' ' + nomeAluno + ' foi ' + statusAprovacao + ' na disciplina de ' + disciplina +
+                                                    console.log('\n ' + sexoDoAluno + ' ' + nomeAluno + ' foi ' + statusAprovacao + ' na disciplina de ' + disciplina +
                                                 '\n Curso: ' + curso +
                                                 '\n ' + sexoDoProfessor + ': ' + nomeProfessor +
                                                 '\n Notas do aluno: ' + nota1 + ', ' + nota2 + ', ' + nota3 + ', ' + nota4 +
-                                                '\n Média Final: ' + mediaAluno + '\n Média final do Exame:' + resuExam)
+                                                '\n Média Final: ' + mediaAluno + '\n Média final do Exame:' + resExam)
+                                                });
 
-                                                // exibirConsole = exibir.console((nomeAluno, nomeProfessor, sexoDoAluno, sexoDoProfessor, disciplina, curso, nota1, nota2, nota3, nota4, mediaAluno, statusAprovacao));
-                                                // console.log(' Média Final exame: ' + resultado)
 
                                             }else if (mediaAluno <= 49) {
 
