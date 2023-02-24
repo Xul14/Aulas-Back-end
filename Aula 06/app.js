@@ -113,9 +113,8 @@ const removerProduto = function (nomeProduto){
 
 const removerProvisorio = function(nomeDoProduto, list){
     let status
-    let lista = list
     let nome = nomeDoProduto
-    const removerItem = lista.slice()
+    const removerItem = list.slice()
     let indice = listaProdutos.indexOf(nome)
     
 
