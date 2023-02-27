@@ -211,36 +211,36 @@ const listagemProdutos = function () {
     listProdutosJson.produtos[5].modelos = listModelosTeclado
 
 
-        // console.log('Nome: ' + listProdutosJson.produtos[1].nome)
-        // console.log('Marca: ' + listProdutosJson.produtos[1].marca)
-        // console.log('Valor: ' + listProdutosJson.produtos[1].valor)
-        // console.log('Cor: ' + listProdutosJson.produtos[1].cores)
-        // console.log('Modelo: ' + listProdutosJson.produtos[1].modelos)
+    // console.log('Nome: ' + listProdutosJson.produtos[1].nome)
+    // console.log('Marca: ' + listProdutosJson.produtos[1].marca)
+    // console.log('Valor: ' + listProdutosJson.produtos[1].valor)
+    // console.log('Cor: ' + listProdutosJson.produtos[1].cores)
+    // console.log('Modelo: ' + listProdutosJson.produtos[1].modelos)
 
 
     // console.log(listProdutosJson)
 
     let produtosLenght = listProdutosJson.produtos.length
     let coresLenght = listProdutosJson.produtos.cores.length
-    let modeloLenght =  listProdutosJson.produtos.modelos.length
-   
-    for (cont = 0; cont <produtosLenght; cont++){
+    let modeloLenght = listProdutosJson.produtos.modelos.length
 
-        console.log(listProdutosJson.produtos[cont].nome)
-         console.log(listProdutosJson.produtos[cont].marca)
-         console.log('Valor: ' + listProdutosJson.produtos[cont].valor)
+    for (cont = 0; cont <= produtosLenght; cont++) {
 
-        for(percorrerCor = 0; percorrerCor < coresLenght; percorrerCor++ ){
-            console.log(listProdutosJson.produtos[percorrerCor].cores)
+        console.log(listProdutosJson.produtos.nome[cont])
+        console.log(listProdutosJson.produtos.marca[cont])
+        console.log(listProdutosJson.produtos.valor[cont])
+
+        for (percorrerCor = 0; percorrerCor <= coresLenght; percorrerCor++) {
+            console.log(listProdutosJson.produtos.cores[percorrerCor])
         }
 
-        for(percorrerModelo = 0; percorrerModelo < modeloLenght; percorrerModelo++ ){
-            console.log(listProdutosJson.produtos[percorrerModelo].modelos)
+        for (percorrerModelo = 0; percorrerModelo <= modeloLenght; percorrerModelo++) {
+            console.log(listProdutosJson.produtos.modelos[percorrerModelo])
         }
 
     }
 
-// console.log(listProdutosJson.produtos)
+    // console.log(listProdutosJson.produtos)
 
     // console.log(listProdutosJson.produtos[1].nome)
     // console.log(listProdutosJson.produtos[1].marca)
