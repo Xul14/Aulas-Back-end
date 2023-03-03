@@ -193,12 +193,14 @@ const listagemProdutos = function () {
     listProdutosJson.produtos[3].mouse = listCoresLGArray
 
     //Mouse
-    listProdutosJson.produtos[6].mouse = listCoresMouseArray
     listProdutosJson.produtos[7].mouse = listCoresMouseArray
+    listProdutosJson.produtos[7].cores = listCoresMouseArray
 
     //Teclado
     listProdutosJson.produtos[4].teclado = listCoresTecladoArray
     listProdutosJson.produtos[5].teclado = listCoresTecladoArray
+    listProdutosJson.produtos[4].cores = listCoresTecladoArray
+    listProdutosJson.produtos[5].cores = listCoresTecladoArray
 
     //Adicionar modelos aos monitores
     listProdutosJson.produtos[0].modelos = listModelosMonitor
@@ -211,39 +213,44 @@ const listagemProdutos = function () {
     listProdutosJson.produtos[5].modelos = listModelosTeclado
 
 
-    // console.log('Nome: ' + listProdutosJson.produtos[1].nome)
-    // console.log('Marca: ' + listProdutosJson.produtos[1].marca)
-    // console.log('Valor: ' + listProdutosJson.produtos[1].valor)
-    // console.log('Cor: ' + listProdutosJson.produtos[1].cores)
-    // console.log('Modelo: ' + listProdutosJson.produtos[1].modelos)
 
 
-    // console.log(listProdutosJson)
+    //Percorre o array de produtos para listar os itens
+    listProdutosJson.produtos.forEach(function (itemProduto) {
+        console.log('Nome: ' + itemProduto.nome)
+        console.log('Marca: ' + itemProduto.marca)
 
-    let produtosLenght = listProdutosJson.produtos.length
-    let coresLenght = listProdutosJson.produtos.cores.length
-    let modeloLenght = listProdutosJson.produtos.modelos.length
+        //Tratamento de erro para quando não existir array de cores
+        if (itemProduto.cores != undefined) {
 
-    for (cont = 0; cont <= produtosLenght; cont++) {
-
-        console.log(listProdutosJson.produtos.nome[cont])
-        console.log(listProdutosJson.produtos.marca[cont])
-        console.log(listProdutosJson.produtos.valor[cont])
-
-        for (percorrerCor = 0; percorrerCor <= coresLenght; percorrerCor++) {
-            console.log(listProdutosJson.produtos.cores[percorrerCor])
+            //Percorre o array de cores que está dentro do array de produtos
+            itemProduto.cores.forEach(function (itemCor) {
+                console.log('Cores: ' + itemCor)
+            })
         }
 
-        for (percorrerModelo = 0; percorrerModelo <= modeloLenght; percorrerModelo++) {
-            console.log(listProdutosJson.produtos.modelos[percorrerModelo])
+        //Tratamento de erro para quando não existir array de modelos
+        if (itemProduto.modelos != undefined) {
+
+            //Percorre o array de modelos que esta dentro do array de produtos(itemProduto)
+            itemProduto.modelos.forEach(function (itemModelo) {
+                console.log('Modelos: ' + itemModelo)
+            })
         }
 
-    }
+    })
 
-    // console.log(listProdutosJson.produtos)
+    //Mesma estrutura mas ltilizando o For
+    // for (let contProdutos = 0; contProdutos < listProdutosJson.produtos.length; contProdutos++) {
+    //     console.log('Nome: ' + listProdutosJson.produtos[contProdutos].nome)
+    //     console.log('Marca: ' + listProdutosJson.produtos[contProdutos].marca)
 
-    // console.log(listProdutosJson.produtos[1].nome)
-    // console.log(listProdutosJson.produtos[1].marca)
+    //     for (let contCores = 0; contCores < listProdutosJson.produtos[contProdutos].cores.length; contCores++) {
+    //         console.log('Cores: ' + listProdutosJson.produtos[contProdutos].cores[contCores])
+    //     }
+
+    // }
+
 
 }
 
