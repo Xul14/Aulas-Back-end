@@ -23,8 +23,34 @@ const getListaDeEstados = function (listaEstados) {
         jsonEstados.quantidade = arrayEstados.length
         return jsonEstados
     } else {
-        return false
+        return status
     }
 }
 
-console.log(getListaDeEstados(estadosCidades.estadosCidades))
+const getDadosEstado = function (sigla) {
+    let dadosEstado
+    let status = false
+
+    estadosCidades.estadosCidades.estados.forEach(estado => {
+        if (estado.sigla == sigla.toUpperCase()) {
+            dadosEstado = {
+                uf: estado.sigla,
+                descricao: estado.nome,
+                capital: estado.capital,
+                regiao: estado.regiao
+            }
+        }
+
+        status = true
+    });
+
+    if(status == true){
+        return dadosEstado
+    }else{
+        return status
+    }
+
+}
+
+// console.log(getListaDeEstados(estadosCidades.estadosCidades))
+console.log(getDadosEstado('SP'))
