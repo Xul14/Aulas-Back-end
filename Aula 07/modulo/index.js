@@ -44,13 +44,41 @@ const getDadosEstado = function (sigla) {
         status = true
     });
 
-    if(status == true){
+    if (status == true) {
         return dadosEstado
-    }else{
+    } else {
         return status
     }
 
 }
 
+const getCapitalEstado = (function (sigla) {
+    let getCapital
+    let status = false
+
+    estadosCidades.estadosCidades.estados.forEach(estado => {
+        if (estado.sigla == sigla.toUpperCase()) {
+            getCapital = {
+                uf: estado.sigla,
+                descricao: estado.nome,
+                capital: estado.regiao
+            }
+        }
+
+        status = true
+
+    });
+
+    if (status == true) {
+        return getCapital
+    } else {
+        return status
+    }
+
+})
+
+
+
 // console.log(getListaDeEstados(estadosCidades.estadosCidades))
-console.log(getDadosEstado('SP'))
+// console.log(getDadosEstado('SP'))
+console.log(getCapitalEstado('RJ'))
