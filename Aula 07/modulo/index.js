@@ -12,25 +12,19 @@ const getListaDeEstados = function (listaEstados) {
     let arrayEstados = []
     let status = false
 
-    listaEstados.estados.forEach(function (estado) {
-        arrayEstados.push(estado.sigla)
+    listaEstados.estados.forEach(estados => {
+        arrayEstados.push(estados.sigla)
         status = true
-    })
+    });
+
 
     if (status == true) {
         jsonEstados.uf = arrayEstados
         jsonEstados.quantidade = arrayEstados.length
         return jsonEstados
-        
     } else {
-        return status
+        return false
     }
-
 }
 
-
-const getDadosEstado = function () {
-
-}
-
-getListaDeEstados(estadosCidades.estadosCidadess)
+console.log(getListaDeEstados(estadosCidades.estadosCidades))
