@@ -77,8 +77,38 @@ const getCapitalEstado = (function (sigla) {
 
 })
 
+const getEstadosRegiao = (function (regiao) {
+    let regiaoDoPais = regiao
+    let jsonEstados = {}
+    let arrayEstados = []
+    let status = false
+
+    jsonEstados.push('regiao', 'estados')
+    
+    estadosCidades.estadosCidades.estados.forEach(estado => {
+        if (estado.regiao == regiaoDoPais.toUpperCase()) {
+            arrayEstados = {
+                uf: estado.sigla,
+                descricao: estado.nome,
+            }
+        }
+
+        status = true
+
+    });
+
+    if (status == true) {
+        return jsonEstados
+    } else {
+        return status
+    }
+
+})
+
+
 
 
 // console.log(getListaDeEstados(estadosCidades.estadosCidades))
 // console.log(getDadosEstado('SP'))
-console.log(getCapitalEstado('RJ'))
+// console.log(getCapitalEstado('RJ'))
+console.log(getEstadosRegiao('sul'))
