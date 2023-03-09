@@ -6,6 +6,7 @@
 ***********************************************************************/
 
 var estadosCidades = require('./estados_cidades.js');
+const estados_cidades = require('./estados_cidades.js');
 
 const getListaDeEstados = function (listaEstados) {
     let jsonEstados = {}
@@ -81,15 +82,16 @@ const getEstadosRegiao = (function (regiao) {
 
     let jsonEstados = {}
     let arrayEstados = []
-    let getUfs = {}
     let status = false
 
     estadosCidades.estadosCidades.estados.forEach(estado => {
         if (estado.regiao == regiao) {
 
+            let getUfs = {}
+
             getUfs.uf = estado.sigla
             getUfs.descricao = estado.nome
-            
+
             arrayEstados.push(getUfs)
             status = true
         }
@@ -106,13 +108,79 @@ const getEstadosRegiao = (function (regiao) {
 
 })
 
+const getCapitalPais = (function () {
+    let jsonCapitais = {}
+    let arraysCapitais = []
+    let status = false
+
+    estadosCidades.estadosCidades.estados.forEach(estado => {
+
+        if (estado.capital_pais != undefined) {
+
+            let getCapitais = {}
+
+            getCapitais.capital_atual = estado.capital_pais.capital
+            getCapitais.uf = estado.sigla
+            getCapitais.descricao = estado.nome
+            getCapitais.capital = estado.capital
+            getCapitais.regiao = estado.regiao
+            getCapitais.capital_pais_ano_inicio = estado.capital_pais.ano_inicio
+            getCapitais.capital_pais_ano_termino = estado.capital_pais.ano_fim
+
+            arraysCapitais.push(getCapitais)
+            status = true
+
+        }
+    });
+
+    if (status == true) {
+        jsonCapitais.capitais = arraysCapitais
+        return jsonCapitais
+    } else {
+        return status
+    }
+
+})
+
+const getCidades = (function (sigla) {
+    let jsonCidades = {}
+    let arrayCidades = []
+    let status = false
+
+    estadosCidades.estadosCidades.estados.forEach(estado => {
 
 
+        if (estado.sigla == sigla.toUpperCase()) {
+
+            jsonCidades.uf = estado.sigla
+            jsonCidades.descricao = estado.nome
+            jsonCidades.quantidade_cidades = estado.cidades.length
+            jsonCidades.cidades = arrayCidades
+
+            estado.cidades.forEach(cidade => {
+                arrayCidades.push(cidade.nome)
+            });
+    
+            jsonCidades.cidades = arrayCidades
+            status = true
+    
+
+        }
+    });
+
+    if (status == true) {
+        return jsonCidades
+    } else {
+        return status
+    }
+})
 
 
 // console.log(getListaDeEstados(estadosCidades.estadosCidades))
-// console.log(getDadosEstado('SP'))
+// console.log(getDadosEstado('RJ'))
 // console.log(getCapitalEstado('RJ'))
-console.log(getEstadosRegiao('Sul'))
+// console.log(getEstadosRegiao('Centro-Oeste'))
+// console.log(getCapitalPais())
+console.log(getCidades('AC'))
 
 
