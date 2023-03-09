@@ -78,26 +78,27 @@ const getCapitalEstado = (function (sigla) {
 })
 
 const getEstadosRegiao = (function (regiao) {
-    let regiaoDoPais = regiao
+
     let jsonEstados = {}
     let arrayEstados = []
+    let getUfs = {}
     let status = false
 
-    jsonEstados.push('regiao', 'estados')
-    
-    estadosCidades.estadosCidades.estados.forEach(estado => {
-        if (estado.regiao == regiaoDoPais.toUpperCase()) {
-            arrayEstados = {
-                uf: estado.sigla,
-                descricao: estado.nome,
+        estadosCidades.estadosCidades.estados.forEach(estado => {
+            if (estado.regiao == regiao.toUpperCase()) {
+                getUfs.uf =  estado.sigla
+                getUfs.descricao = estado.nome   
             }
-        }
 
-        status = true
+            arrayEstados.push(getUfs)
+            status = true
+    
+        });        
 
-    });
 
     if (status == true) {
+        jsonEstados.regiao = regiao
+        jsonEstados.estados = arrayEstados
         return jsonEstados
     } else {
         return status
@@ -108,7 +109,10 @@ const getEstadosRegiao = (function (regiao) {
 
 
 
+
 // console.log(getListaDeEstados(estadosCidades.estadosCidades))
 // console.log(getDadosEstado('SP'))
 // console.log(getCapitalEstado('RJ'))
-console.log(getEstadosRegiao('sul'))
+console.log(getEstadosRegiao('Suldeste'))
+
+
