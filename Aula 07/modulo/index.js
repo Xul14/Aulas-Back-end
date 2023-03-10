@@ -8,7 +8,7 @@
 var estadosCidades = require('./estados_cidades.js');
 const estados_cidades = require('./estados_cidades.js');
 
-const getListaDeEstados = function (listaEstados) {
+const getListaDeEstados = (function (listaEstados) {
     let jsonEstados = {}
     let arrayEstados = []
     let status = false
@@ -26,9 +26,9 @@ const getListaDeEstados = function (listaEstados) {
     } else {
         return status
     }
-}
+})
 
-const getDadosEstado = function (sigla) {
+const getDadosEstado = (function (sigla) {
     let dadosEstado
     let status = false
 
@@ -51,7 +51,7 @@ const getDadosEstado = function (sigla) {
         return status
     }
 
-}
+})
 
 const getCapitalEstado = (function (sigla) {
     let getCapital
@@ -176,11 +176,11 @@ const getCidades = (function (sigla) {
 })
 
 
-// console.log(getListaDeEstados(estadosCidades.estadosCidades))
-// console.log(getDadosEstado('RJ'))
+console.log(getListaDeEstados(estadosCidades.estadosCidades))
+console.log(getDadosEstado('RJ'))
 // console.log(getCapitalEstado('RJ'))
 // console.log(getEstadosRegiao('Centro-Oeste'))
 // console.log(getCapitalPais())
-console.log(getCidades('AC'))
+// console.log(getCidades('AC'))
 
 
