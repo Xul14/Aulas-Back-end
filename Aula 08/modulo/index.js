@@ -85,7 +85,7 @@ const getEstadosRegiao = (function (regiao) {
     let status = false
 
     estadosCidades.estadosCidades.estados.forEach(estado => {
-        if (estado.regiao == regiao) {
+        if (estado.regiao.toUpperCase() == regiao.toUpperCase()) {
 
             let getUfs = {}
 
