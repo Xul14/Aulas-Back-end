@@ -67,11 +67,11 @@ app.get('/v1/lion-school/aluno/:id', cors(), async function(request, response) {
 
     //Valida se existe registro de alunos
     if (dadosAluno) {
-        response.json(dadosAluno)
         response.status(200)
+        response.json(dadosAluno)
     } else {
-        response.json()
         response.status(404)
+        response.json()
     }
 
 })
