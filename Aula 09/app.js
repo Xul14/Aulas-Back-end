@@ -16,10 +16,16 @@
 
  */
 
+//Import do arquivo da controller que irá solicitar a model dos dados do banco.
+var controllerAluno = require('./controller/controller_aluno.js')
+
 //Import das bibliotecas para API
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+
+//Define que os dados que irão chegar no body da requisição serão nos padrões JSON
+const bodyPareserJSON = bodyParser.json()
 
 //Cria  objeto app conforme a classe do express
 const app = express()
@@ -41,9 +47,6 @@ app.use((request, response, next) => {
 //Endpoint que retorna todos os dados dos alunos
 app.get('/v1/lion-school/aluno', cors(), async function(request, response) {
 
-    //Import do arquivo da controller que irá solicitar a model dos dados do banco.
-    let controllerAluno = require('./controller/controller_aluno.js')
-
     //Recebe od dados da controller do aluno
     let dadosAluno = await controllerAluno.getAlunos();
 
@@ -61,7 +64,6 @@ app.get('/v1/lion-school/aluno', cors(), async function(request, response) {
 //Endpoint que retorna o aluno filtrando pelo id
 app.get('/v1/lion-school/aluno/:id', cors(), async function(request, response) {
     let id = request.params.id
-    let controllerAluno = require('./controller/controller_aluno.js')
 
     let dadosAluno = await controllerAluno.getBuscarAlunoId(id);
 
@@ -79,7 +81,6 @@ app.get('/v1/lion-school/aluno/:id', cors(), async function(request, response) {
 //Endpoint que retorna o aluno filtrando pelo nome
 app.get('/v1/lion-school/aluno/nome/:nome', cors(), async function(request, response) {
     let nome = request.params.nome
-    let controllerAluno = require('./controller/controller_aluno.js')
 
     let dadosAluno = await controllerAluno.getBuscarAlunoNome(nome);
 
@@ -95,8 +96,15 @@ app.get('/v1/lion-school/aluno/nome/:nome', cors(), async function(request, resp
 })
 
 //Endpoint que insere um dados novo no banco
-app.post('/v1/lion-school/aluno', cors(), async function(request, response) {
+app.post('/v1/lion-school/aluno', cors(), bodyPareserJSON, async function(request, response) {
 
+    //Recebe os dados encaminhados na requisição
+    let dadosBody = request.body
+
+    let resultDadosAluno = await controllerAluno.inserirAluno(dadosBody)
+
+    response.status(resultDadosAluno.status)
+    response.json(resultDadosAluno)
 })
 
 //Endpoint que atualiza o dado de um aluno existente filtrando pelo id 

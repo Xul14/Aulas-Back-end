@@ -5,9 +5,35 @@
  * Versão: 1.0
  *******************************************************************************/
 
-//Insere um novo aluno
-const inserirAluno = function(dadosAluno) {
+//Iport das mensagens de erro
+var message = require('./modulo/config.js')
 
+//Import do arquivo DAO para acessar dados do aluno no banco.
+var alunoDAO = require('../model/DAO/alunoDAO.js');
+
+//Insere um novo aluno
+const inserirAluno = async function(dadosAluno) {
+
+    //Validação para tratar campos obrigatórios e quantidade de caracteres
+    if (dadosAluno.nome == '' || dadosAluno.nome == undefined || dadosAluno.nome.length > 100 ||
+        dadosAluno.rg == '' || dadosAluno.rg == undefined || dadosAluno.rg.length > 15 ||
+        dadosAluno.cpf == '' || dadosAluno.cpf == undefined || dadosAluno.cpf.length > 18 ||
+        dadosAluno.data_nascimento == '' || dadosAluno.data_nascimento == undefined || dadosAluno.data_nascimento.length > 10 ||
+        dadosAluno.email == '' || dadosAluno.email == undefined || dadosAluno.email.length > 200
+    ) {
+        return message.ERROR_REQUIRED_FIELDS
+
+    } else {
+        //Envia os dados para a model inserir no banco
+        let resultDadosAluno = await alunoDAO.insertAluno(dadosAluno)
+
+        //Valida se o banco inseriu corretamente os dados
+        if (resultDadosAluno) {
+            return message.SUCCESS_CREATED_ITEM
+        } else {
+            return message.ERROR_INTERNAL_SERVER
+        }
+    }
 }
 
 //Atualzar um aluno existente
@@ -23,9 +49,6 @@ const deletarAluno = function(id) {
 //Retorna a lista de todos os alunos
 const getAlunos = async function() {
     let dadosAlunosJson = {};
-
-    //Import do arquivo DAO para acessar dados do aluno no banco.
-    let alunoDAO = require('../model/DAO/alunoDAO.js');
 
     //Chama a função do arquivo DAO que irá retornar todos os registros do banco
     let dadosAluno = await alunoDAO.selectAllAlunos();
@@ -45,7 +68,6 @@ const getAlunos = async function() {
 const getBuscarAlunoId = async function(id) {
     let alunosJsonId = {}
 
-    let alunoDAO = require('../model/DAO/alunoDAO.js')
     let dadosAluno = await alunoDAO.selectByIdAlunos(id);
 
     if (dadosAluno) {
@@ -61,7 +83,6 @@ const getBuscarAlunoId = async function(id) {
 const getBuscarAlunoNome = async function(nome) {
     let alunosJsonNome = {}
 
-    let alunoDAO = require('../model/DAO/alunoDAO.js')
     let dadosAluno = await alunoDAO.selectByNameAlunos(nome);
 
     if (dadosAluno != null && dadosAluno != undefined && isNaN(dadosAluno)) {
@@ -76,5 +97,6 @@ const getBuscarAlunoNome = async function(nome) {
 module.exports = {
     getAlunos,
     getBuscarAlunoId,
-    getBuscarAlunoNome
+    getBuscarAlunoNome,
+    inserirAluno
 }

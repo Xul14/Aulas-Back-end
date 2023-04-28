@@ -5,8 +5,39 @@
  * Versão: 1.0
  *******************************************************************************/
 
+
+//Import da biblioteca do prisma client
+var { PrismaClient } = require('@prisma/client');
+
+//Instância da classe PrismaClient 
+var prisma = new PrismaClient();
+
 //Inserir dados do aluno no banco de dados
-const insertAluno = function(dadosAluno) {
+const insertAluno = async function(dadosAluno) {
+
+    //Script para inserir dados
+    let sql = `insert into tbl_aluno(
+        nome,
+        rg,
+        cpf,
+        data_nascimento,
+        email
+    )values(
+        '${dadosAluno.nome}',
+        '${dadosAluno.rg}',
+        '${dadosAluno.cpf}',
+        '${dadosAluno.data_nascimento}',
+        '${dadosAluno.email}'
+    )`
+
+    //Executa o script
+    let resultStatus = await prisma.$executeRawUnsafe(sql);
+
+    //Verificação de falhas
+    if (resultStatus)
+        return true;
+    else
+        return false;
 
 }
 
@@ -22,12 +53,6 @@ const deleteAluno = function(id) {
 
 //Retornar dados do aluno 
 const selectAllAlunos = async function() {
-
-    //Import da biblioteca do prisma client
-    let { PrismaClient } = require('@prisma/client');
-
-    //Instância da classe PrismaClient 
-    let prisma = new PrismaClient();
 
     //Sript SQL para buscar todos o utens no banco
     let sql = 'select * from tbl_aluno';
@@ -46,9 +71,9 @@ const selectAllAlunos = async function() {
 
 //Retornar dados do aluno filtrando pelo id
 const selectByIdAlunos = async function(id) {
-    let { PrismaClient } = require('@prisma/client')
+    // let { PrismaClient } = require('@prisma/client')
 
-    let prisma = new PrismaClient()
+    // let prisma = new PrismaClient()
 
     let sql = `select * from tbl_aluno where id = ${id}`
 
@@ -63,9 +88,9 @@ const selectByIdAlunos = async function(id) {
 
 //Retornar dados do aluno filtrando pelo nome
 const selectByNameAlunos = async function(name) {
-    let { PrismaClient } = require('@prisma/client')
+    //let { PrismaClient } = require('@prisma/client')
 
-    let prisma = new PrismaClient()
+    // let prisma = new PrismaClient()
 
     let sql = `select * from tbl_aluno where nome like '%${name}%'`
 
@@ -81,5 +106,6 @@ const selectByNameAlunos = async function(name) {
 module.exports = {
     selectAllAlunos,
     selectByIdAlunos,
-    selectByNameAlunos
+    selectByNameAlunos,
+    insertAluno
 }
