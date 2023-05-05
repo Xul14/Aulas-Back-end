@@ -42,12 +42,44 @@ const insertAluno = async function(dadosAluno) {
 }
 
 //Atualizar dados do aluno no banco de dados
-const updateAluno = function(dadosAluno) {
+const updateAluno = async function(dadosAluno) {
+
+    //ScriptSQL para atualizar dados no banco
+    let sql = `update tbl_aluno set 
+
+                nome = '${dadosAluno.nome}',
+                rg = '${dadosAluno.rg}',
+                cpf = '${dadosAluno.cpf}',
+                data_nascimento = '${dadosAluno.data_nascimento}',
+                email = '${dadosAluno.emal}'
+
+         where id = ${dadosAluno.id}`
+
+    //Executa o script
+    let resultStatus = await prisma.$executeRawUnsafe(sql)
+
+    if (resultStatus) {
+        return true
+    } else {
+        return false
+    }
 
 }
 
 //Deletar dados do aluno no banco de dados
-const deleteAluno = function(id) {
+const deleteAluno = async function(id) {
+
+    //ScriptSQL para deletar um registro no banco
+    let sql = `delete from tbl_aluno where id = '${id}'`
+
+    //Executa o script
+    let resultStatus = await prisma.$executeRawUnsafe(sql)
+
+    if (resultStatus) {
+        return true
+    } else {
+        return false
+    }
 
 }
 
@@ -71,9 +103,6 @@ const selectAllAlunos = async function() {
 
 //Retornar dados do aluno filtrando pelo id
 const selectByIdAlunos = async function(id) {
-    // let { PrismaClient } = require('@prisma/client')
-
-    // let prisma = new PrismaClient()
 
     let sql = `select * from tbl_aluno where id = ${id}`
 
@@ -88,9 +117,6 @@ const selectByIdAlunos = async function(id) {
 
 //Retornar dados do aluno filtrando pelo nome
 const selectByNameAlunos = async function(name) {
-    //let { PrismaClient } = require('@prisma/client')
-
-    // let prisma = new PrismaClient()
 
     let sql = `select * from tbl_aluno where nome like '%${name}%'`
 
@@ -107,5 +133,7 @@ module.exports = {
     selectAllAlunos,
     selectByIdAlunos,
     selectByNameAlunos,
-    insertAluno
+    insertAluno,
+    updateAluno,
+    deleteAluno
 }

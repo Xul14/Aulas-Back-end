@@ -37,12 +37,67 @@ const inserirAluno = async function(dadosAluno) {
 }
 
 //Atualzar um aluno existente
-const atualizarAluno = function(dadosAluno) {
+const atualizarAluno = async function(dadosAluno, idAluno) {
 
+    //Validação para tratar campos obrigatórios e quantidade de caracteres
+    if (
+        dadosAluno.nome == '' || dadosAluno.nome == undefined || dadosAluno.nome.length > 100 ||
+        dadosAluno.rg == '' || dadosAluno.rg == undefined || dadosAluno.rg.length > 15 ||
+        dadosAluno.cpf == '' || dadosAluno.cpf == undefined || dadosAluno.cpf.length > 18 ||
+        dadosAluno.data_nascimento == '' || dadosAluno.data_nascimento == undefined || dadosAluno.data_nascimento.length > 10 ||
+        dadosAluno.email == '' || dadosAluno.email == undefined || dadosAluno.email.length > 200
+    ) {
+
+        return message.ERROR_REQUIRED_FIELDS
+
+        //Tratativas de erro no ID
+    } else if (idAluno == "" || idAluno == undefined || isNaN(idAluno)) {
+
+        return message.ERROR_INVALID_ID //Status code 400
+
+    } else {
+
+        //Adiciona o id do aluno no JSON dos dados
+        dadosAluno.id = idAluno
+
+        //Encaminha os dados para a model do aluno
+        let resultDadosAluno = await alunoDAO.updateAluno(dadosAluno)
+
+        if (resultDadosAluno) {
+            return message.SUCCESS_UPDATED_ITEM
+        } else {
+            return message.ERROR_INTERNAL_SERVER
+        }
+    }
 }
 
 //Exclui um aluno
-const deletarAluno = function(id) {
+const deletarAluno = async function(idAluno) {
+
+    let buscarAluno = await getBuscarAlunoId(idAluno)
+
+    if (buscarAluno) {
+
+        if (idAluno == "" || idAluno == undefined || isNaN(idAluno)) {
+
+            return message.ERROR_INVALID_ID //Status code 400
+
+        } else {
+
+            //Encaminha os dados para a model do aluno
+            let resultDadosAluno = await alunoDAO.deleteAluno(idAluno)
+
+            if (resultDadosAluno) {
+                return message.SUCCESS_DELETED_ITEM
+            } else {
+                return message.ERROR_INTERNAL_SERVER
+            }
+        }
+
+    } else {
+        return message.ERROR_ID_NOT_FOUND
+    }
+
 
 }
 
@@ -98,5 +153,7 @@ module.exports = {
     getAlunos,
     getBuscarAlunoId,
     getBuscarAlunoNome,
-    inserirAluno
+    inserirAluno,
+    atualizarAluno,
+    deletarAluno
 }
